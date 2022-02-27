@@ -1,0 +1,36 @@
+{%extends 'SwiftApp/base.html'%}
+{%block content%}
+<div class="jumbotron" >
+    <div class="container" align="center">
+        <h1>Login</h1><hr>
+        <form method="POST">
+            {%csrf_token%}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="login">
+                <div>
+                    <label for="id_username">Username: </label>
+                    <input type="text" name="username" class="form-control" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+                </div><br>
+                <div>
+                    <label for="id_password">Password: </label>
+                    <input type="password" name="password" class="form-control" autocomplete="current-password" required id="id_password">
+                </div>
+            </div>
+                <br>
+
+                <button class='btn btn-lg btn-info' type="submit">Login</button>&nbsp&nbsp
+                <a href="/signup/" class="btn btn-lg btn-success">Signup</a>
+
+        </form>
+        <br>
+
+    </div>
+</div>
+{%endblock content%}

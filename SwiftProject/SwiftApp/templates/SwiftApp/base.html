@@ -1,0 +1,72 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Ticket Booking</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Font --> 
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+
+    <!-- Font Icons -->  
+    <script src="https://kit.fontawesome.com/ced9991468.js" crossorigin="anonymous"></script>
+
+    <!-- CSS Styles -->
+    <link rel='stylesheet' href="{% static 'SwiftApp/css/styles.css' %}">
+
+
+</head>
+<body>
+    <nav class='navbar navbar-default navstyle'>
+        <div class="container-fluid headercontainer">
+            <div class="navbar-header">
+               <a href="/" class="pull-left"><img src="{% static 'SwiftApp/images/logo.png' %}"  id="logo-img"></a>
+            </div>
+            <ul class='nav navbar-nav pull-left'>
+                <li> <a href="/" ><i class="fas fa-plane"></i>Flights</a> </li>
+                <li> <a href="https://www.irctc.co.in/nget/train-search" target="_blank"><i class="fas fa-subway"></i>Trains</a> </li>
+                <li> <a href="https://yash24.pythonanywhere.com/" target="_blank"><i class="fas fa-route"></i>Wanderlust Travel Blog</a> </li>
+            </ul>
+            <ul class='nav navbar-nav navbar-right pull-right'>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"> Support <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                      <a href="tel:+918600914430"><i class="fa fa-phone-alt"></i>+91 8600914430</a>
+                      <a href="mailto:ysborikar2411@gmail.com"><i class="fas fa-envelope"></i>ysborikar2411@gmail.com</a>
+                    </div>
+                </li>
+                {% if request.user.is_active%}
+                <li> <a href="/accounts/logout/"><i class="fas fa-sign-out-alt"></i>Logout</a> </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"> Hello, {{request.user}} <i class="fas fa-user-circle"></i></a>
+                    <div class="dropdown-menu">
+                        <a><i class="far fa-user"></i> {{request.user.first_name}} {{request.user.last_name}}</a>
+                        <a href="/user-booking" id="mybooking"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+                        {% if request.user.is_superuser%}
+                        <a href="/admin-pannel-index" class="btn btn-sm btn-danger"><i class="fas fa-tools"></i> Admin Pannel </a>
+                        {%endif%}
+                    </div>
+                </li>
+                {%else%}
+                <li> <a href="/accounts/login/" ><i class="fas fa-sign-in-alt"></i>Login</a> </li>
+                <li> <a href="/signup"><i class="fas fa-user-plus"></i>Signup</a> </li>
+                <li> <a> Hello, Guest <i class="fas fa-user-circle"></i></a></li>
+                {%endif%}
+            </ul>
+        </div> <!--//headercontainer-->  
+    </nav> <!--//navbar-->  
+
+    {%block content%}
+    {%endblock%}
+
+    <!-- ******FOOTER****** --> 
+    <footer>
+            <p>&copy; 2021 Yash Borikar. This Airline Ticket Booking site is created by Yash Borikar.</p>
+            <p>For any queries contact me on ysborikar2411@gmail.com</p>
+    </footer><!-- //footer -->
+</body>
+</html>

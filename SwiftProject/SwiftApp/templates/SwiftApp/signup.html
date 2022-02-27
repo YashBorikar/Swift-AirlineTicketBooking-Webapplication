@@ -1,0 +1,81 @@
+{%extends 'SwiftApp/base.html'%}
+{%block content%}
+<div class="jumbotron" >
+    <div class="container">
+        <h1>Signup</h1><hr>
+        <form method="post">
+            {%csrf_token%}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="col-sm-6">
+                <div class="col-sm-6 form-group">
+                    <label for="id_first_name">First name <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" class="form-control" name="first_name" maxlength="150" id="id_first_name">
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="id_last_name">Last name <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" class="form-control" name="last_name" maxlength="150" id="id_last_name">
+                </div>
+                <div class="col-sm-12 form-group">
+                    <label for="id_email">Email address <span class="helptext" style="color:red;">*</span></label>
+                    <input type="email" class="form-control" name="email" maxlength="254" id="id_email">
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-12 form-group">
+                    <label for="id_username">Username <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" class="form-control" name="username" maxlength="150" autofocus required id="id_username">
+                    <span class="helptext">Use alphanumeric character and <b>@, +, -, _ , . </b> Special Character only.</span><br>
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-12 form-group">
+                    <label for="id_password1">Password <span class="helptext" style="color:red;">*</span></label>
+                    <input type="password" class="form-control" name="password1" autocomplete="new-password" required id="id_password1">
+                    <span class="helptext">
+                        <ul>
+                            <li>Minimum 8 character</li>
+                            <li>Use Alphanumeric and Special Character only</li>
+                        </ul>
+                    </span>
+                    {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-12 form-group">
+                    <label for="id_password2">Re-Enter Password <span class="helptext" style="color:red;">*</span></label>
+                    <input type="password" class="form-control" name="password2" autocomplete="new-password" required id="id_password2">
+                    {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <input type="submit" class="btn btn-primary" value="Signup">
+
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock content%}

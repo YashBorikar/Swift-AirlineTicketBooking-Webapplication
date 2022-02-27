@@ -1,0 +1,11 @@
+{% extends 'SwiftApp/baseadmin.html' %}
+{% block admincontent %}
+<div class="container" align="center">
+<h1> Are you sure you want to Delete Record?</h1><br>
+    <form method="post">
+        {%csrf_token%}
+        <input type="submit" class="btn btn-lg btn-danger" value="Delete Record">&nbsp&nbsp
+        <a href="/admin-list-airline" class="btn btn-lg btn-success">Cancel</a>
+    </form>
+</div><br>
+{%endblock admincontent%}

@@ -1,0 +1,179 @@
+{% extends "SwiftApp/base.html" %}
+{%load static%}
+{%block content%}
+<div class="container" id="booking-table">
+            <div class="col-sm-12">
+                <div class="col-sm-3">
+                    <p><b>Airline :</b>&nbsp; {{bookedairline.get_Airline_display}}</p>
+                    <p><b>Flight Number :</b>&nbsp;{{bookedairline.Flight_Num}} </p>
+                </div>
+                <div class="col-sm-9">
+                    <p><b>Travel Date :</b>&nbsp; {{date}}</p>
+                    <div class="col-sm-5" style="padding-left: 0px;">
+                        <p><b>From :</b>&nbsp; {{bookedairline.get_Departure_City_display}}<b></b></p>
+                        <p><b>Departure Time :</b>&nbsp; {{bookedairline.get_Depart_Time_display}}</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p><b>To:</b>&nbsp; {{bookedairline.get_Arrival_City_display}}<b></b></p>
+                        <p><b>Arrival Time :</b>&nbsp; {{bookedairline.get_Arrival_Time_display}}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="fare"><b>Fare :</b>&nbsp</label>
+                        <span id="fare"> {{bookedairline.Ticket_Price}}</span>
+                    </div>
+                </div>
+            </div>
+</div>
+</div>
+<div class="jumbotron" >
+    <div class="container" align="center">
+        <div class="col-sm-8 booking-form">
+        <form action="/confirm-booking/" method="POST">
+            {%csrf_token%}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <h2><i class="fas fa-user-plus"></i> Enter Traveller Details</h2><br>
+            <span>Important Note: Please ensure that the names of the passengers on the travel documents is the same as on their government issued identity proof.</span><hr>
+
+                <div class="col-sm-2 form-group">
+                    <label for="id_Title">Title</label>
+                    <select name="Title" class="form-control" id="id_Title">
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Ms.">Ms.</option>
+                    </select>
+                </div>
+                <div class="col-sm-5 form-group">
+                    <label for="id_First_Name">First name <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" name="First_Name" class="form-control" placeholder="Traveller First Name" required id="id_First_Name">
+                    {% if form.First_Name.errors %}
+                        {% for error in form.First_Name.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-5 form-group">
+                    <label for="id_Second_Name">Second name <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" name="Second_Name" class="form-control" placeholder="Traveller Second Name" required id="id_Second_Name">
+                    {% if form.Second_Name.errors %}
+                        {% for error in form.Second_Name.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div><br>
+                <div class="col-sm-7 form-group">
+                    <label for="id_Email">Email <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" name="Email" class="form-control" placeholder="Email Address: name@example.com" required id="id_Email">
+                    {% if form.Email.errors %}
+                        {% for error in form.Email.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-5 form-group">
+                    <label for="id_Contact_Number">Contact number <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" name="Contact_Number" class="form-control" placeholder="Contact Number" required id="id_Contact_Number">
+                    {% if form.Contact_Number.errors %}
+                        {% for error in form.Contact_Number.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div><br><br>
+                <div class="col-sm-12 form-group">
+                    <label for="id_Address">Address <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" name="Address" class="form-control" placeholder="House/ Building Name, Street/Road Name, Locality Name" required id="id_Address">
+                </div>
+                <div class="col-sm-5 form-group">
+                    <label for="id_City">City </label>
+                    <input type="text" name="City" class="form-control" placeholder="City" id="id_City">
+                    {% if form.City.errors %}
+                        {% for error in form.City.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-4 form-group">
+                    <label for="id_State">State </label>
+                    <input type="text" name="State" class="form-control" placeholder="State" id="id_State">
+                    {% if form.State.errors %}
+                        {% for error in form.State.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+                <div class="col-sm-3 form-group">
+                    <label for="id_Zip_Code">Zip code <span class="helptext" style="color:red;">*</span></label>
+                    <input type="text" name="Zip_Code" class="form-control" placeholder="Zip-Code" required id="id_Zip_Code">
+                    {% if form.Zip_Code.errors %}
+                        {% for error in form.Zip_Code.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {%endif%}
+                </div>
+
+                <button type="submit" class="btn btn-lg" style="background: linear-gradient(to right, #203A43 , #0082c8); color:white;">Proceed to Book Ticket</button>
+                <input type="hidden" name="date" value={{date}}>
+                <input type="hidden" id="redeem" name="redeem" value="False">
+                <input type="hidden" name="confirm-airline" value={{bookedairline.id}}>
+
+            <br>
+        </form>
+        </div>
+        <div class="col-sm-3 redeem-form">
+            <h3>Redeem Code</h3><hr>
+            <p>Use Redeem Code <b style="color: #ff1a1a;">Swift2021 </b>for 30% Discount on Flight Booking Price</p>
+            <div class="col-sm-12" style="margin-bottom: 20px;">
+                <label for="coupen"></label>
+                <input id="coupen" name="coupen-code" class="form-control" type="text" placeholder="Drop Reedem Code here">
+            </div>
+            <button onclick="myFunction()" class="btn btn-md" style="background: #004266; color:white;">Submit</button>
+
+            <h4 id="coupen-message" style="color: red;"></h4>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+var pass='True'
+    function myFunction() {
+            coupen=document.getElementById("coupen").value;
+            if (coupen=='Swift2021'){
+                if (pass=='True'){
+                pass='False'
+                strfare=document.getElementById("fare").innerHTML
+                intfare=Number(strfare)
+                finalprice=parseFloat(intfare*0.70).toFixed(2)
+                document.getElementById("fare").innerHTML=finalprice
+                document.getElementById("redeem").value = "True"
+                document.getElementById("coupen-message").innerHTML="Reedem code Applied Successfully"
+                }
+                else{
+                document.getElementById("coupen-message").innerHTML="Redeem code can be used only once"
+                }
+            }
+            else{
+                document.getElementById("coupen-message").innerHTML="Incorrect Reedem Code"
+            }
+
+        }
+</script>
+{%endblock content%}

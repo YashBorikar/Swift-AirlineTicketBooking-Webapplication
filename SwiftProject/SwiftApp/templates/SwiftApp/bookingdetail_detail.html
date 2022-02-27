@@ -1,0 +1,29 @@
+{% extends 'SwiftApp/baseadmin.html' %}
+{% block admincontent %}
+<div class="container" style="font-size: 20px;">
+<h1>Booking Details </h1>
+<div class="col-sm-6">
+<h3> Passenger Details</h3>
+<strong>Booking Time: </strong> {{book.Booktime}}<br>
+<strong>Booked by Username: </strong> {{book.user}}<br>
+<strong>Passenger Name: </strong> {{book.Name}}<br>
+<strong>Passenger Contact Number: </strong> {{book.Phone_Number}}<br>
+<strong>Passenger Address: </strong> {{book.Address}}<br>
+</div>
+
+<div class="col-sm-6">
+<h3> Flight Details</h3>
+<strong>Travel Date: </strong> {{book.Date}}<br>
+<strong>Airline: </strong> {{book.Flight_Details.get_Airline_display}}<br>
+<strong>Departure City: </strong> {{book.Flight_Details.get_Departure_City_display}}<br>
+<strong>Terminal: </strong> <br>
+<strong>Departure Time: </strong> {{book.Flight_Details.get_Depart_Time_display}}<br>
+<strong>Arrival City: </strong> {{book.Flight_Details.get_Arrival_City_display}}<br>
+<strong>Arrival Time: </strong> {{book.Flight_Details.get_Arrival_Time_display}}<br>
+<strong>Fare: </strong> {{book.Final_Fare}}<br>
+</div>
+
+<a href="/admin-list-booking"><button class="btn btn-lg btn-success">Back</button></a>&nbsp&nbsp
+<a href="/admin-user-booking/cancel-booking/{{book.id}}" class="btn btn-lg btn-danger">Cancel Booking</a>
+</div>
+{% endblock admincontent%}

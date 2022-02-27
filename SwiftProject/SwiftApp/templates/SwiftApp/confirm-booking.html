@@ -1,0 +1,67 @@
+{% extends 'SwiftApp/base.html' %}
+{%load static%}
+{% block content %}
+
+<div class="jumbotron" >
+    <div class="alert alert-success" id="bookcfrm" role="alert">
+  		<h2>Booking Confirmed!</h2>
+	</div>
+	<div class="col-md-6">
+    	<h2>Booking Details</h2><hr class="my-4">
+	</div>
+	<button onclick="window.print()" class="btn btn-lg btn-info float-right print-button"><i class="fas fa-print"></i>&nbsp Print Details</button>
+    <div class="Ticket-Container hidden-xs"> <!--  Ticket Container hidden xs -->
+        <img src="{% static 'SwiftApp/images/Ticket.jpg' %}" alt="Ticket" class="responsive">
+        <div class="Content-Container">
+			<div class="container">
+				<div class="col-sm-4 Ticket">
+		        	<span><strong>Name: </strong>{{bookingdata.Name}}</span><br>
+		        </div>
+		        <div class="col-sm-6 Ticket">
+		        	<span><strong>Travel Date: </strong>{{bookingdata.Date}}</span><br>
+		        	<span><strong>Airline: </strong>{{bookingdata.Flight_Details.get_Airline_display}}</span><br>
+		        	<span><strong>Flight Number:</strong> {{bookingdata.Flight_Details.Flight_Num}}</span><br>
+		        	<span><strong>Terminal: {{bookingdata.Flight_Details.Terminal}}</strong></span><br>
+		        </div>
+			</div><br>
+			<div class="container">
+				<div class="col-sm-4 Ticket">
+		        	<span><strong>From: </strong>{{bookingdata.Flight_Details.get_Departure_City_display}}</span><br>
+		        	<span><strong>Boarding Time: </strong>{{bookingdata.Flight_Details.get_Depart_Time_display}}</span><br>
+		        </div>
+		        <div class="col-sm-6 Ticket">
+		        	<span><strong>To: </strong>{{bookingdata.Flight_Details.get_Arrival_City_display}}</span><br>
+		        	<span><strong>Arrival Time: </strong>{{bookingdata.Flight_Details.get_Arrival_Time_display}}</span><br>
+		        </div>
+			</div>
+			<div class="container">
+				<div class="col-sm-12 Ticket">
+					<span><strong>Fare: </strong>{{bookingdata.Final_Fare}}</span><br>
+				</div>
+			</div>
+		</div><!-- Content Container -->
+	</div><!--  Ticket Container hidden xs -->
+	<div class="Ticket-Container-xs hidden-sm hidden-md hidden-lg hidden-xl"> <!--  Ticket Container xs -->
+			<div class="container col-sm-12" >
+				<div class="col-sm-5 Ticket">
+		        	<span><strong>Name: </strong>{{bookingdata.Name}}</span><br>
+					<span><strong>Travel Date: </strong>{{bookingdata.Date}}</span><br>
+		        	<span><strong>Airline: </strong>{{bookingdata.Flight_Details.get_Airline_display}}</span><br>
+		        	<span><strong>Flight Number: </strong></span><br>
+		        	<span><strong>Terminal: </strong></span><br>
+		        </div><br>
+				<div class="col-sm-5 Ticket">
+		        	<span><strong>From: </strong>{{bookingdata.Flight_Details.get_Departure_City_display}}</span><br>
+		        	<span><strong>Boarding Time: </strong>{{bookingdata.Flight_Details.get_Depart_Time_display}}</span><br>
+		        	<span><strong>To: </strong>{{bookingdata.Flight_Details.get_Arrival_City_display}}</span><br>
+		        	<span><strong>Arrival Time: </strong>{{bookingdata.Flight_Details.get_Arrival_Time_display}}</span><br>
+					<span><strong>Fare: </strong>{{bookingdata.Final_Fare}}</span><br>
+		        </div>
+			</div>
+	</div><!--  Ticket Container xs -->
+	    <br>
+        <div class="alert alert-info" role="alert">
+			<p>Booking Details are send to <strong>{{bookingdata.Email}}</strong>, Please check your Email!</p>
+		</div>
+</div>
+{% endblock content %}

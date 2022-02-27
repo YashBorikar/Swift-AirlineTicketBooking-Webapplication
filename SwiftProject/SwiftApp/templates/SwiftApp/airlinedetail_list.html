@@ -1,0 +1,45 @@
+{% extends 'SwiftApp/baseadmin.html' %}
+{% block admincontent %}
+<h1>Airline Details</h1>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <a href="/admin-create-airline" class="btn btn-lg btn-success btn-block">Create New Airline Log</a><br>
+    <div class="container" align="center" style="overflow-x:auto;">
+    <table border="1" class="table table-hover">
+        <thead class="thead-dark">
+            <th scope="col"> Sr No. </th>
+            <th scope="col"> Airline </th>
+            <th scope="col"> Flight Number </th>
+            <th scope="col"> Terminal</th>
+            <th scope="col"> Departure City </th>
+            <th scope="col"> Departure Time </th>
+            <th scope="col"> Arrival City </th>
+            <th scope="col"> Arrival Time </th>
+            <th scope="col"> Base Fare </th>
+            <th scope="col"></th>
+        </thead>
+        {% for airline in airlinedetail_list%}
+        <tr>
+            <td>{{forloop.counter0|add:page_obj.start_index}}</td>
+            <td>{{airline.get_Airline_display}}</td>
+            <td>{{airline.Flight_Num}}</td>
+            <td>{{airline.Terminal}}</td>
+            <td>{{airline.get_Departure_City_display}}</td>
+            <td>{{airline.get_Depart_Time_display}}</td>
+            <td>{{airline.get_Arrival_City_display}}</td>
+            <td>{{airline.get_Arrival_Time_display}}</td>
+            <td>{{airline.Ticket_Price}}</td>
+            <td><a href="/admin-update-airline/{{airline.id}}" class="btn btn-sm btn-warning">Update</a>
+            <a href="/admin-delete-airline/{{airline.id}}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+    </div>
+      <div align="center">
+    {% include 'SwiftApp/pagination.html' with page=page_obj %}<br>
+    <a href="/admin-pannel-index"><button class="btn btn-lg btn-info">Back</button></a>
+      </div>
+  </div>
+</div><br>
+{% endblock admincontent%}

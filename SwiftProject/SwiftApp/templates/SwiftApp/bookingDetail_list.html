@@ -1,0 +1,35 @@
+{% extends 'SwiftApp/baseadmin.html' %}
+{% block admincontent %}
+<h1>Booking History</h1><br>
+<div class="container" align="center" style="overflow-x:auto;">
+<table border="1" class="table table-hover">
+    <thead>
+        <th> Sr No. </th>
+        <th> Booking Time </th>
+        <th> Passenger Name </th>
+        <th> Travel Date </th>
+        <th> Airline </th>
+        <th> DEPARTURE FROM </th>
+        <th> DEPARTURE TIME </th>
+        <th> ARRIVAL TO </th>
+        <th></th>
+    </thead>
+    {% for book in bookingdetail_list%}
+    <tr style="font-size: 18px;">
+        <td>{{forloop.counter}}</td>
+        <td>{{book.Booktime}}</td>
+        <td>{{book.Name}}</td>
+        <td>{{book.Date}}</td>
+        <td>{{book.Flight_Details.get_Airline_display}}</td>
+        <td>{{book.Flight_Details.get_Departure_City_display}}</td>
+        <td>{{book.Flight_Details.get_Depart_Time_display}}</td>
+        <td>{{book.Flight_Details.get_Arrival_City_display}}</td>
+        <td><a href="/admin-detail-booking/{{book.pk}}" class="btn btn-info">Details</a></td>
+    </tr>
+    {%endfor%}
+</table>
+
+<br><a href="/admin-pannel-index" class="btn btn-lg btn-success">Back</a>
+</div>
+<br>
+{% endblock admincontent%}

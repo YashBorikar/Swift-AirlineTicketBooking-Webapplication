@@ -1,0 +1,74 @@
+{% extends "SwiftApp/base.html" %}
+{%load static%}
+{%block content%}
+<form action="/select-airline" method="GET">
+    <div class="col-sm-12 list-search">
+        <div class="col-sm-3" style="padding-bottom:20px;">
+        <label for="fly-from">From &nbsp<i class="fas fa-plane-departure"></i></label>
+            <select name="departurecity" class="form-control" required id="fly-from">
+                <option value="{{departurecity.0}}">{{departurecity.1}}</option>
+                {% for depcity in DepartCity %}
+                    <option  value="{{depcity.0}}">{{depcity.1}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-3">
+        <label for="fly-to">To &nbsp<i class="fas fa-plane-arrival"></i></label>
+            <select name="arrivalcity" class="form-control" required id="fly-to">
+                <option value="{{arrivalcity.0}}">{{arrivalcity.1}}</option>
+                {% for arrcity in ArrivalCity %}
+                    <option  value="{{arrcity.0}}">{{arrcity.1}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label for="date">Departure Date &nbsp<i class="far fa-calendar-alt"></i></label>
+            <input type="date" class="form-control" id="date" name="date" value='{{date}}' min="2021-01-01" max="2021-07-31" required>
+        </div>
+        <div class="col-sm-3 search-button" align="center">
+            <input type="submit" class='btn btn-lg btn-secondary' value="Search">
+        </div>
+
+    </div>
+    <div class="container">
+        <p>{{airlinelist.count}} Flights found</p>
+        {%if airlinelist%}
+        {%for detail in airlinelist%}
+        <div class="col-sm-12 airlist">
+            <div class="col-sm-3">
+                <p>Date: {{date}}</p>
+                <p>Airline: <b>{{detail.get_Airline_display}}</b></p>
+            </div>
+            <div class="col-sm-3">
+                <p>Depart: {{detail.get_Departure_City_display}}</p>
+                <p>Time: <b>{{detail.get_Depart_Time_display}}</b></p>
+            </div>
+            <div class="col-sm-3">
+                <p>Arrival: {{detail.get_Arrival_City_display}}</p>
+                <p>Time: <b>{{detail.get_Arrival_Time_display}}</b></p>
+            </div>
+            <div class="col-sm-1">
+                <p>Fare: <span style="color: #ff1a1a"><b>&#8377;</b></span><b>{{detail.Ticket_Price}}</b></p>
+            </div>
+            <div class="col-sm-2">
+                <input type="Submit" formaction="/booking-details/{{detail.id}}" class="btn btn-info" value="Book Now">
+            </div>
+        </div>
+        {%endfor%}
+        {%else%}
+        <p align="center"><b>Sorry!</b> No Flights for this Route. Try again with Different Route</p>
+        {%endif%}
+    </div>
+</form>
+<br>
+
+
+<script>
+var today = new Date();
+var dd = today.getDate()+1;
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+var date = yyyy+'-'+'0'+mm+'-'+dd;
+document.getElementById("date").setAttribute("min", date);
+</script>
+{%endblock content%}

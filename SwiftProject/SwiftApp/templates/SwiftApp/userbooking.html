@@ -1,0 +1,42 @@
+{% extends "SwiftApp/base.html" %}
+{%load static%}
+{%block content%}
+<div class="container">
+        {%if booking%}
+        {%for detail in booking%}
+        <div class="col-sm-11 userbooklist">
+            <div class="col-sm-12">
+                <p><b>Booking Time:</b> {{detail.Booktime}}</p>
+            </div>
+            <div class="col-sm-12 userbook">
+                <div class="col-sm-3">
+                    <p><b>Name: {{detail.Name}}</b></p>
+                    <p>Airline: {{detail.Flight_Details.get_Airline_display}}</p>
+                    <p>Flight Number: {{detail.Flight_Details.Flight_Num}}</p>
+                    <p>Terminal: {{detail.Flight_Details.Terminal}}</p>
+                </div>
+                <div class="col-sm-9">
+                    <p><b>Travel Date: {{detail.Date}}</b></p>
+                    <div class="col-sm-5" style="padding-left: 0px;">
+                        <p>From: <b>{{detail.Flight_Details.get_Departure_City_display}}</b></p>
+                        <p>Departure Time: {{detail.Flight_Details.get_Depart_Time_display}}</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p>To: <b>{{detail.Flight_Details.get_Arrival_City_display}}</b></p>
+                        <p>Arrival Time: {{detail.Flight_Details.get_Arrival_Time_display}}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>Fare: {{detail.Final_Fare}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" align="right">
+                <a href="/user-booking/cancel-booking/{{detail.id}}" class="btn btn-danger cancel-button">Cancel Booking</a>
+            </div>
+        </div>
+        {%endfor%}
+        {%else%}
+        <h3 align="center" style="margin-top: 5%;"><b>Sorry!</b> No Flight Booking Records found.</h3>
+        {%endif%}
+</div>
+{%endblock content%}

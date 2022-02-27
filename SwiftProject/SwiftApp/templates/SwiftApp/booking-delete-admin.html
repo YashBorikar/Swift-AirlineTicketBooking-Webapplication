@@ -1,0 +1,17 @@
+{% extends "SwiftApp/baseadmin.html" %}
+{%block admincontent%}
+<div class="container" align="center">
+<h1> Are you sure you want to Cancel Booking?</h1><br>
+    <form method="post">
+        {%csrf_token%}
+        {%if action%}
+        <button type="submit" class="btn btn-lg btn-danger">Cancel Booking</button>&nbsp&nbsp
+        <a href="/admin-list-booking/" class="btn btn-lg btn-success">Cancel</a>
+        {%else%}
+        <button type="submit" class="btn btn-lg btn-danger" disabled>Cancel Booking</button>&nbsp&nbsp
+        <a href="/admin-list-booking/" class="btn btn-lg btn-success">Cancel</a>
+        <h3 style="color:red;">Sorry! You have already accomplish this Journey </h3>
+        {%endif%}
+    </form>
+</div><br>
+{%endblock admincontent%}

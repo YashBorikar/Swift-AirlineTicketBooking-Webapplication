@@ -1,0 +1,218 @@
+{% extends "SwiftApp/base.html" %}
+{%load static%}
+{%block content%}
+<div class="col-sm-12" style="background: linear-gradient(to right, #203A43 , #0082c8);">
+    <h5 align="center" style="color: white;">Scroll down for Fine Points about Swift Airline Ticket Booking Project</h5>
+</div>
+
+<div class="containerindex">
+    <img src="{% static 'SwiftApp/images/Airline Image.jpg' %}"  class="airline-image hidden-xs">
+    <form action="/select-airline" method="get">
+        <div class="col-sm-12 search-container hidden-xs">
+            <div class="col-sm-3" style="padding-bottom:20px;">
+                <label for="fly-from">From &nbsp<i class="fas fa-plane-departure"></i></label>
+                <select name="departurecity" class="form-control" required id="fly-from">
+                    <option value="">Depart From </option>
+                    {% for depcity in DepartCity %}
+                        <option  value="{{depcity.0}}">{{depcity.1}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="fly-to">To &nbsp<i class="fas fa-plane-arrival"></i></label>
+                <select name="arrivalcity" class="form-control" required id="fly-to">
+                    <option value="">Going To</option>
+                    {% for arrcity in ArrivalCity %}
+                        <option  value="{{arrcity.0}}">{{arrcity.1}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="date">Departure Date &nbsp<i class="far fa-calendar-alt"></i></label>
+                <input type="date" class="form-control" id="date" name="date" value='{{date}}' min="2021-01-01" max="2021-07-31" required>
+            </div>
+            <div class="col-sm-3 search-button" align="center">
+                <input type="submit" class='btn btn-lg btn-secondary' value="Search">
+            </div>
+        </div>
+    </form>
+    <form action="/select-airline" method="get">
+    <div class="col-sm-12 search-container-small hidden-sm hidden-md hidden-lg hidden-xl">
+            <br>
+            <div class="col-sm-3" style="padding-bottom:20px;">
+                <label for="fly-from">From &nbsp<i class="fas fa-plane-departure"></i></label>
+                <select name="departurecity" class="form-control" required id="fly-from">
+                    <option value="">Depart From</option>
+                    {% for depcity in DepartCity %}
+                        <option  value="{{depcity.0}}">{{depcity.1}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="fly-to">To &nbsp<i class="fas fa-plane-arrival"></i></label>
+                <select name="arrivalcity" class="form-control" required id="fly-to">
+                    <option value="">Going To</option>
+                    {% for arrcity in ArrivalCity %}
+                        <option  value="{{arrcity.0}}">{{arrcity.1}}</option>
+                    {% endfor %}
+                </select>
+            </div><br>
+            <div class="col-sm-3">
+                <label for="date">Departure Date &nbsp<i class="far fa-calendar-alt"></i></label>
+                <input type="date" class="form-control" id="date" name="date" value='{{date}}' min="2021-01-01" max="2021-07-31" required>
+            </div>
+            <div class="col-sm-3 search-button" align="center">
+                <input type="submit" class='btn btn-lg btn-secondary' value="Search">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-12">
+    <h1 align="center" style="color: #004266; font-size: 40px;">Popular Flights</h1><hr>
+</div>
+<div class="container">
+    <a id="DELBOM" style="text-decoration: none; color:black;" href="">
+    <div class="col-sm-2 popular-fly">
+        <div>
+            <p><b>New Delhi (DEL)</b> to</p>
+            <p><b>Mumbai (BOM)</b></p><br>
+            <p>Starting @</p>
+            <p style="color: #ff1a1a"><b>&#8377; 2,570</b></p>
+        </div>
+    </div>
+    </a>
+    <a id="BOMDEL" style="text-decoration: none; color:black;" href="">
+    <div class="col-sm-2 popular-fly">
+        <div>
+            <p><b>Mumbai (BOM)</b> to</p>
+            <p><b>New Delhi (DEL) </b></p><br>
+            <p>Starting @</p>
+            <p style="color: #ff1a1a"><b>&#8377; 2,200</b></p>
+        </div>
+    </div>
+    </a>
+    <a id="DELBLR" style="text-decoration: none; color:black;" href="">
+    <div class="col-sm-2 popular-fly">
+        <div>
+            <p><b>New Delhi (DEL)</b> to</p>
+            <p><b>Bangalore(BLR)</b></p><br>
+            <p>Starting @</p>
+            <p style="color: #ff1a1a"><b>&#8377; 3,200</b></p>
+        </div>
+    </div>
+    </a>
+    <a id="BLRDEL" style="text-decoration: none; color:black;" href="">
+    <div class="col-sm-2 popular-fly">
+        <div>
+            <p><b>Bangalore(BLR)</b> to</p>
+            <p><b>New Delhi (DEL)</b></p><br>
+            <p>Starting @</p>
+            <p style="color: #ff1a1a"><b>&#8377; 3,000</b></p>
+        </div>
+    </div>
+    </a>
+    <a id="PNQHYD" style="text-decoration: none; color:black;" href="">
+    <div class="col-sm-2 popular-fly">
+        <div>
+            <p><b>Pune (PNQ)</b> to</p>
+            <p><b>Hyderabad (HYD) </b></p><br>
+            <p>Starting @</p>
+            <p style="color: #ff1a1a"><b>&#8377; 1,800</b></p>
+        </div>
+    </div>
+    </a>
+</div>
+
+<div class="container" style="margin:20px 0px 30px 0px;width:100%;">
+<div class="col-sm-12">
+    <h1 style="color: #004266; font-size: 30px;">Details about Swift Airline Ticket Booking Project</h1><hr>
+    <div style="font-size: 18px;">
+        <span> Swift is a Dummy Airline Booking Website without payment gateway.</span><br>
+        <span>Explore features of Swift Airline Ticket Booking Website like Redeem Code, User Booking Cancellation based
+            on Journey accomplishment and many more.</span><br><br>
+        <span> Swift has provision Admin Pannel for Admin user for Backend which provide details about Booking Details
+            of all Users and has provision of cancel booking, also all Airline Details including Flights routes,
+            Departure City & Time, Arrival City & Time and more which has provision for Admin to Create Flight Route,
+            Update existing, and Delete.</span><br>
+        <span><strong>User must Login as Admin to enable Backend</strong></span>
+        <p>Login as Admin to view admin button bellow. Use Credentials: <b>Username = admin, Password = admin123</b></p>
+        {% if request.user.is_superuser %}
+        <p>
+             <a href="/admin-pannel-index" class="btn btn-md btn-danger">Admin Panel</a>
+        </p>
+        {%endif%}
+        <br>
+        <p> Technology Stack used in Swift Flight Booking Website.</p>
+        <span><b>Django, Python, HTML, CSS, JavaScript, Bootstrap, Git</b> for version Control, <b>PythonAnywhere</b> for Hosting</span>
+    </div>
+</div>
+</div>
+
+<div class="container" style="margin:0px; width:100%;">
+<div class="col-sm-12" style="font-size: 18px;">
+    <h1 style="color: #004266; font-size: 30px;">About Me</h1><hr>
+    <p> This Swift Airline Boooking Website is created by Yash Borikar </p>
+    <p><b>Connect Me</b></p>
+    <ul class="social list-inline">
+        <li><a href="https://www.linkedin.com/in/ysborikar2411" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a href="https://github.com/ysborikar2411" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://www.facebook.com/yash.borikar.1" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com/ysborikar2411/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+    </ul>
+    <p>Other project are listed bellow</p>
+    <a style="text-decoration: none; color:black;" href="https://ysborikar2411.github.io/portfolio/" target="_blank">
+    <div class="col-sm-2 projects">
+        <p>Portfolio Website</p>
+    </div>
+    </a>
+    <a style="text-decoration: none; color:black;" href="">
+    <div class="col-sm-2 projects" style="width: 370px;">
+        <p>Swift Airline Ticket Booking Project</p>
+    </div>
+    </a>
+    <a style="text-decoration: none; color:black;" href="https://yash24.pythonanywhere.com/" target="_blank">
+    <div class="col-sm-2 projects" style="width: 250px;">
+        <p>Wanderlust Travel Blog</p>
+    </div>
+    </a>
+    <a style="text-decoration: none; color:black;" href="https://www.linkedin.com/pulse/deploying-containerized-multi-tier-database-using-services-borikar/?trackingId=%2FxMdMWkbv9aNeePtsU4ALw%3D%3D" target="_blank">
+    <div class="col-sm-2 projects" style="width: 250px;">
+        <p>Google Cloud Platform</p>
+    </div>
+    </a>
+</div>
+    <h4 style="margin-left: 15px;">Check more on <b><a href="https://ysborikar2411.github.io/portfolio/" target="_blank"><i class="fas fa-external-link-alt"></i> Portfolio Website</a> / <a href="https://www.linkedin.com/in/ysborikar2411" target="_blank"><i class="fab fa-linkedin-in"></i> Linkedin</a></b></h4>
+</div>
+
+
+<script>
+
+var today = new Date();
+var dd = today.getDate()+1;
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+var date = yyyy+'-'+'0'+mm+'-'+dd;
+document.getElementById("date").setAttribute("min", date);
+
+<!--Popular Flights-->
+
+var ndd = today.getDate()+1;
+var date = yyyy+'-'+'0'+mm+'-'+ndd;
+var dm = '/select-airline/?departurecity=1&arrivalcity=2&date='+date
+var md = '/select-airline/?departurecity=2&arrivalcity=1&date='+date
+var db = '/select-airline/?departurecity=1&arrivalcity=3&date='+date
+var bd = '/select-airline/?departurecity=3&arrivalcity=1&date='+date
+var ph = '/select-airline/?departurecity=4&arrivalcity=6&date='+date
+document.getElementById("DELBOM").setAttribute("href", dm);
+document.getElementById("BOMDEL").setAttribute("href", md);
+document.getElementById("DELBLR").setAttribute("href", db);
+document.getElementById("BLRDEL").setAttribute("href", bd);
+document.getElementById("PNQHYD").setAttribute("href", ph);
+
+</script>
+
+{%endblock content%}
+
+
+
